@@ -50,7 +50,9 @@ export default async function HomePage({ searchParams }: Props) {
   const casinos: CasinoWithAttachment[] = catData?.casinos ?? []
   const activeCategory = catData?.category ?? null
   const offers: SpecialOffer[] = offersRes.status === 'fulfilled' ? offersRes.value.data : []
-  const topOffers = offers.slice(0, 6)
+  // Show only offers that belong to the selected category's casinos.
+  const casinoIds = new Set(casinos.map((c) => c.id))
+  const topOffers = offers.filter((o) => casinoIds.has(o.casino_id)).slice(0, 6)
 
   const orgSchema = buildOrganizationSchema()
   const listSchema = buildItemListSchema(
