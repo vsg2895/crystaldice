@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Category } from '@shared/types/category'
 
 /**
- * Crystal Dice category selector — elegant glass pills with an indigo→cyan
+ * Idev Affiliation category selector — elegant glass pills with an indigo→cyan
  * active state. Works on the home page (basePath="/") and the casinos listing.
  */
 export default function CategoryNav({

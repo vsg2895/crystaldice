@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-// Crystal Dice design: light glass pagination with indigo→cyan active page.
+// Idev Affiliation design: light glass pagination with indigo→cyan active page.
 export default function Pagination({ basePath, current, last }: { basePath: string; current: number; last: number }) {
   if (last <= 1) return null
 

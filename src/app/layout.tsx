@@ -15,7 +15,7 @@ const inter = Inter({ variable: '--font-inter', subsets: ['latin'] })
 const fraunces = Fraunces({ variable: '--font-fraunces', subsets: ['latin'], style: ['normal', 'italic'] })
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'Crystal Dice'
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'Idev Affiliation'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? ''
 
 export const metadata: Metadata = {

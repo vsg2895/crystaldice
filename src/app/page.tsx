@@ -42,17 +42,15 @@ export default async function HomePage({ searchParams }: Props) {
 
   const [categoryRes, offersRes] = await Promise.allSettled([
     selected ? getCategory(selected) : Promise.resolve(null),
-    getSpecialOffers(),
+    getSpecialOffers(selected, 6),
   ])
 
   const catData =
     categoryRes.status === 'fulfilled' && categoryRes.value ? categoryRes.value.data : null
   const casinos: CasinoWithAttachment[] = catData?.casinos ?? []
   const activeCategory = catData?.category ?? null
-  const offers: SpecialOffer[] = offersRes.status === 'fulfilled' ? offersRes.value.data : []
-  // Show only offers that belong to the selected category's casinos.
-  const casinoIds = new Set(casinos.map((c) => c.id))
-  const topOffers = offers.filter((o) => casinoIds.has(o.casino_id)).slice(0, 6)
+  // Offers are already scoped to the selected category and capped by the backend (?category=&limit=).
+  const topOffers: SpecialOffer[] = offersRes.status === 'fulfilled' ? offersRes.value.data : []
 
   const orgSchema = buildOrganizationSchema()
   const listSchema = buildItemListSchema(

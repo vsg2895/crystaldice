@@ -65,8 +65,16 @@ export const getCategory = (slug: string, page = 1): Promise<ApiResponse<Categor
   publicFetch(`/categories/${slug}?page=${page}`, [`category:${slug}`])
 
 // ── Special Offers ───────────────────────────────────────────────────────────
-export const getSpecialOffers = (): Promise<ApiResponse<SpecialOffer[]>> =>
-  publicFetch('/special-offers', ['special-offers'])
+export const getSpecialOffers = (
+  category?: string,
+  limit?: number,
+): Promise<ApiResponse<SpecialOffer[]>> => {
+  const params = new URLSearchParams()
+  if (category) params.set('category', category)
+  if (limit && limit > 0) params.set('limit', String(limit))
+  const qs = params.toString()
+  return publicFetch(`/special-offers${qs ? `?${qs}` : ''}`, ['special-offers'])
+}
 
 export const getSpecialOffer = (slug: string): Promise<ApiResponse<SpecialOffer>> =>
   publicFetch(`/special-offers/${slug}`, [`special-offer:${slug}`])

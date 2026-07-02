@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { resolveImageUrl } from '@/lib/images'
 import type { SpecialOffer } from '@shared/types/specialOffer'
 
-// Crystal Dice design: light glass offer card with indigo accents.
+// Idev Affiliation design: light glass offer card with indigo accents.
 export default function SpecialOfferCard({ offer }: { offer: SpecialOffer }) {
   const banner = resolveImageUrl(offer.banner_image ?? offer.image_path)
 

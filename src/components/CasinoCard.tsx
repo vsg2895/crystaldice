@@ -14,7 +14,7 @@ function Stars({ rating }: { rating: number }) {
   )
 }
 
-// Crystal Dice design: light "glass" review row with an indigo→cyan rank chip.
+// Idev Affiliation design: light "glass" review row with an indigo→cyan rank chip.
 export default function CasinoCard({ casino, rank }: { casino: CasinoWithAttachment; rank?: number }) {
   const logo = resolveImageUrl(casino.image_path)
 
