@@ -83,18 +83,16 @@ export const getSpecialOffer = (slug: string): Promise<ApiResponse<SpecialOffer>
 export const getSocialLinks = (): Promise<ApiResponse<SocialLink[]>> =>
   publicFetch('/social-links', ['social-links'])
 
-// ── Newsletter unsubscribe (one-click, token-based) ───────────────────────────
-// Server-side only; never cached. Returns true when the request is accepted
-// (the backend is idempotent, so unknown tokens also resolve cleanly).
+// ── Newsletter unsubscribe (RFC 8058 one-click, token-based) ──────────────────
+// Server-side only; never cached. Hits the keyless one-click endpoint, so it
+// needs no site key and works no matter which site serves this page — the opaque
+// token is the credential. The backend is idempotent (unknown tokens resolve ok).
 export const unsubscribe = async (token: string): Promise<boolean> => {
-  const res = await fetch(`${API}/sites/${SITE}/newsletter/unsubscribe`, {
+  // API is e.g. http://localhost:8000/api/v1/public → drop the trailing /public.
+  const base = API.replace(/\/public\/?$/, '')
+  const res = await fetch(`${base}/unsubscribe/${encodeURIComponent(token)}`, {
     method: 'POST',
-    headers: {
-      'X-Site-Key': KEY as string,
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({ token }),
+    headers: { Accept: 'application/json' },
     cache: 'no-store',
   })
   return res.ok

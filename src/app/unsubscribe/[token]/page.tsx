@@ -34,7 +34,7 @@ export default async function UnsubscribePage({ params }: Props) {
         <div className="px-8 py-7">
           {ok ? (
             <p className="text-sm leading-relaxed text-zinc-600">
-              You will no longer receive subscription emails from{' '}
+              You will no longer receive these emails from{' '}
               <span className="font-semibold text-zinc-900">{SITE_NAME}</span>. Changed your mind?
               You can subscribe again any time from our homepage.
             </p>
