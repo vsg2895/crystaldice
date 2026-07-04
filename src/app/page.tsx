@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCategories, getCategory, getSpecialOffers } from '@/lib/api'
-import { buildOrganizationSchema, buildItemListSchema } from '@/lib/seo'
+import { buildItemListSchema } from '@/lib/seo'
 import { COPY } from '@/constants/copy'
 import CasinoCard from '@/components/CasinoCard'
 import CategoryNav from '@/components/CategoryNav'
@@ -52,7 +52,8 @@ export default async function HomePage({ searchParams }: Props) {
   // Offers are already scoped to the selected category and capped by the backend (?category=&limit=).
   const topOffers: SpecialOffer[] = offersRes.status === 'fulfilled' ? offersRes.value.data : []
 
-  const orgSchema = buildOrganizationSchema()
+  // Organization schema is emitted site-wide from the root layout; the home
+  // page only adds its page-specific ItemList of top casinos.
   const listSchema = buildItemListSchema(
     `Top Casinos at ${SITE_NAME}`,
     `${SITE_URL}/casinos`,
@@ -61,7 +62,6 @@ export default async function HomePage({ searchParams }: Props) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
 
       <main>

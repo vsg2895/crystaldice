@@ -5,7 +5,9 @@ import NewsletterForm from '@/components/NewsletterForm'
 import SocialIcons from '@/components/SocialIcons'
 import CookieConsent from '@/components/CookieConsent'
 import CookieSettingsButton from '@/components/CookieSettingsButton'
+import Logo from '@/components/Logo'
 import { getSocialLinks } from '@/lib/api'
+import { buildOrganizationSchema } from '@/lib/seo'
 import { COPY } from '@/constants/copy'
 import { LEGAL_PAGES } from '@/constants/legalPages'
 import type { SocialLink } from '@shared/types/socialLink'
@@ -52,15 +54,25 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     socialLinks = []
   }
 
+  // Site-wide Organization structured data. Rendered once here in the root
+  // layout so every page carries it. Next.js manages the document <head> (manual
+  // <head> tags in a root layout are discouraged), so per the framework's JSON-LD
+  // guide the <script> is rendered in the layout body — crawlers read JSON-LD
+  // from anywhere in the document. The `<` escaping keeps the payload XSS-safe.
+  const organizationSchema = buildOrganizationSchema()
+
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col text-slate-900">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
+          }}
+        />
         <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-xl">
           <div className="container mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
-            <Link href="/" className="flex items-center gap-3">
-              <GemMark />
-              <span className="font-display text-xl font-semibold tracking-tight text-slate-900">{SITE_NAME}</span>
-            </Link>
+            <Logo />
             <nav aria-label="Main navigation">
               <ul className="flex items-center gap-1" role="list">
                 {NAV_LINKS.map(({ href, label }) => (
