@@ -75,9 +75,9 @@ export default async function HomePage({ searchParams }: Props) {
               The internet&rsquo;s most refined{' '}
               <span className="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text italic text-transparent">casino guide</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-500">
-              Expert-reviewed, independently rated. Play only at the sites we trust for {YEAR}.
-            </p>
+            {/*<p className="mx-auto mt-6 max-w-2xl text-lg text-slate-500">*/}
+            {/*  Expert-reviewed, independently rated. Play only at the sites we trust for {YEAR}.*/}
+            {/*</p>*/}
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               <Link href="/casinos" className="rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 px-8 py-4 font-semibold text-white shadow-lg shadow-indigo-500/30 transition-transform hover:scale-105">{COPY.home.featuredCasinos}</Link>
               <Link href="/special-offers" className="rounded-full border border-slate-300 bg-white/70 px-8 py-4 font-semibold text-slate-700 backdrop-blur transition-colors hover:border-indigo-300 hover:text-indigo-700">{COPY.home.specialOffers}</Link>
