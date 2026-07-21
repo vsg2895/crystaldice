@@ -4,6 +4,7 @@ import Link from 'next/link'
 import NewsletterForm from '@/components/NewsletterForm'
 import SocialIcons from '@/components/SocialIcons'
 import CookieConsent from '@/components/CookieConsent'
+import Toaster from '@/components/Toaster'
 import CookieSettingsButton from '@/components/CookieSettingsButton'
 import Logo from '@/components/Logo'
 import { getSocialLinks } from '@/lib/api'
@@ -20,13 +21,34 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'Idev Affiliation'
 
+const SITE_TITLE = `${SITE_NAME} — Expert Online Casino Reviews, Bonuses & Offers`
+const SITE_DESCRIPTION = `${SITE_NAME} is your independent guide to the best online casinos — expert reviews, exclusive bonuses and hand-picked special offers.`
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL || 'https://idevaffiliation.com'),
   title: {
-    default: SITE_NAME,
+    // Home & inner pages set their own; this is the SEO-friendly fallback title.
+    default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
-  description: `Expert casino reviews, special offers and guides at ${SITE_NAME}.`,
-  metadataBase: new URL(SITE_URL || 'http://localhost:3000'),
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: ['online casino reviews', 'casino bonuses', 'special offers', 'best online casinos', SITE_NAME],
+  // Explicit per-site favicon so the browser tab always shows this site's mark.
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    shortcut: ['/icon.svg'],
+    apple: [{ url: '/icon.svg' }],
+  },
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL || 'https://idevaffiliation.com',
+  },
+  twitter: { card: 'summary_large_image', title: SITE_TITLE, description: SITE_DESCRIPTION },
+  robots: { index: true, follow: true },
 }
 
 const NAV_LINKS = [
@@ -149,6 +171,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </footer>
 
         <CookieConsent />
+        <Toaster />
       </body>
     </html>
   )
