@@ -4,7 +4,7 @@ import Link from 'next/link'
 import NewsletterForm from '@/components/NewsletterForm'
 import SocialIcons from '@/components/SocialIcons'
 import CookieConsent from '@/components/CookieConsent'
-import Toaster from '@/components/Toaster'
+import ToastProvider from '@/components/ToastProvider'
 import CookieSettingsButton from '@/components/CookieSettingsButton'
 import Logo from '@/components/Logo'
 import { getSocialLinks } from '@/lib/api'
@@ -86,6 +86,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col text-slate-900">
+        <ToastProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -171,7 +172,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </footer>
 
         <CookieConsent />
-        <Toaster />
+        </ToastProvider>
       </body>
     </html>
   )
