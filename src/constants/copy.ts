@@ -33,6 +33,8 @@ export const COPY = {
     featuredCasinos: 'Browse Reviews',
     specialOffers: 'See Bonus Offers',
     viewAll: 'See All',
+    // Leads the home <title>; the year and brand are appended in page.tsx.
+    homeTitle: 'Independent Casino Reviews',
     metaDescription:
       'Independent reviews of the online casinos worth your time — payout speed, bonus terms and support tested one operator at a time.',
   },
@@ -67,6 +69,9 @@ export const COPY = {
     error: 'Something went wrong. Please try again.',
   },
   footer: {
+    // Short brand blurb in the footer, above the legal links.
+    tagline:
+      'An independent review desk. We test operators end to end and publish what happened — 18+.',
     disclaimer:
       'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose. We may earn a commission when you sign up through a link on this site, which never affects how we score a casino.',
   },
