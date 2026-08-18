@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-// Accent matches this site's identity (and its unsubscribe page).
+/**
+ * Accent panel for this page — THIS site's brand colour, not a shared default.
+ * indigo-600 — the hero gradient start. white 6.29:1, white/80 4.63:1.
+ * Both figures matter: the heading is large text, but the `text-white/80`
+ * subtitle is small and needs the full 4.5:1.
+ */
 const ACCENT = '#4f46e5'
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'our newsletter'
 

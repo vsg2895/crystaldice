@@ -35,6 +35,7 @@ export const COPY = {
     viewAll: 'See All',
     // Leads the home <title>; the year and brand are appended in page.tsx.
     homeTitle: 'Independent Casino Reviews',
+    faqTitle: 'Questions we get asked',
     metaDescription:
       'Independent reviews of the online casinos worth your time — payout speed, bonus terms and support tested one operator at a time.',
   },
@@ -42,6 +43,14 @@ export const COPY = {
     pageTitle: 'Online Casino Reviews',
     pageDescription:
       'In-depth reviews of licensed online casinos, scored on payout speed, bonus terms and the quality of their support.',
+    // Meta-description fallback for a casino review page. Casino records are
+    // GLOBAL master data shared by every site, so without a per-site line here
+    // all four domains would ship the identical description for the same casino.
+    // Short per-site tail appended to an ADMIN-ENTERED casino meta description.
+    // Casino records are shared by every site, so without this the same
+    // description would ship on all four domains the moment the field is filled.
+    reviewSignature: 'Independently reviewed and rated.',
+    reviewSummary: 'an independent review of payout speed, bonus terms and support, tested end to end.',
     visitCasino: 'Visit Casino',
     readReview: 'Read Full Review',
     rating: 'Review Score',
@@ -51,6 +60,9 @@ export const COPY = {
     pageTitle: 'Casino Bonus Offers',
     pageDescription:
       'Welcome bonuses and free-spin deals with the wagering requirements spelled out before you claim anything.',
+    // Appended to an offer's (shared) bonus text so the four sites do not ship
+    // an identical meta description for the same offer.
+    offerMetaSuffix: 'Wagering terms checked and spelled out in full before you claim anything.',
     claim: 'Claim Offer',
     noResults: 'No offers are running right now.',
   },
@@ -58,6 +70,9 @@ export const COPY = {
     pageTitle: 'Casino Categories',
     pageDescription:
       'Find casinos by what actually matters to you — fast withdrawals, live dealer tables, low wagering and more.',
+    // Meta-description tail for a single category page. Category records are
+    // shared master data, so this is what keeps the four sites distinct there.
+    categoryMetaSuffix: 'ranked by our review scores, with payout speed and bonus terms compared side by side.',
     noResults: 'No categories yet.',
   },
   newsletter: {
