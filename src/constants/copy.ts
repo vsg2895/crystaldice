@@ -87,6 +87,11 @@ export const COPY = {
     // Short brand blurb in the footer, above the legal links.
     tagline:
       'An independent review desk. We test operators end to end and publish what happened — 18+.',
+    // Registered postal address, shown beside the copyright line. A physical
+    // address in the footer is what mailbox providers and the gambling
+    // affiliate compliance checks both look for, and it must match the address
+    // used in the email templates.
+    postalAddress: '32 Stasikratous Street, Nicosia 1065, Cyprus',
     disclaimer:
       'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose. We may earn a commission when you sign up through a link on this site, which never affects how we score a casino.',
   },
