@@ -16,6 +16,24 @@
  * end-to-end and publish what happened.
  */
 export const COPY = {
+  // SEO identity. These three reach the <title>, the meta description and the
+  // keywords tag on EVERY page that does not set its own — which is most of
+  // them — so they are the strings most likely to be read as duplicate content
+  // if a sibling domain ships the same words. Kept here, beside the rest of this
+  // site's wording, rather than inline in layout.tsx where they drifted into
+  // being byte-identical with roulettingo.
+  site: {
+    titleTail: 'Independent Online Casino Reviews & Bonus Terms',
+    description:
+      'is an independent review desk: we open accounts, test the operators end to end and publish exactly what happened, bonus terms included.',
+    keywords: [
+      'independent casino reviews',
+      'casino bonus terms explained',
+      'tested casino payouts',
+      'online casino comparison',
+      'casino wagering requirements',
+    ],
+  },
   nav: {
     casinos: 'Casinos',
     specialOffers: 'Special Offers',
