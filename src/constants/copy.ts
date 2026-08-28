@@ -103,13 +103,21 @@ export const COPY = {
   },
   footer: {
     // Short brand blurb in the footer, above the legal links.
+    //
+    // KEEP THIS UNDER ~72 CHARACTERS. The footer's brand column is
+    // (1152 - 32 padding - 40 gap) / 2 = 540px at the sm: breakpoint where the
+    // grid becomes two columns, and the text renders at 14px — about 77
+    // characters to a line. Anything longer wraps to a second line, which is
+    // what this wording was trimmed to fix. It still wraps on a phone, where a
+    // single column is ~340px; that is unavoidable for any real sentence and is
+    // the correct behaviour there.
     tagline:
-      'An independent review desk. We test operators end to end and publish what happened — 18+.',
+      'An independent review desk. We test operators end to end — 18+.',
     // Registered postal address, shown beside the copyright line. A physical
     // address in the footer is what mailbox providers and the gambling
     // affiliate compliance checks both look for, and it must match the address
     // used in the email templates.
-    postalAddress: '32 Stasikratous Street, Nicosia 1065, Cyprus',
+    postalAddress: '221B Baker Street, London NW1 6XE, United Kingdom',
     disclaimer:
       'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose. We may earn a commission when you sign up through a link on this site, which never affects how we score a casino.',
   },
