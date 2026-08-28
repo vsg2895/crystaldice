@@ -58,12 +58,12 @@ export default function NewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={COPY.newsletter.placeholder}
-            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 sm:w-72"
+            className="w-full rounded-xl border min-h-11 border-slate-300 bg-white px-3 py-2 text-base text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 sm:w-72"
           />
           <button
             type="submit"
             disabled={loading}
-            className="shrink-0 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-indigo-500/30 transition-transform hover:scale-[1.03] disabled:opacity-60"
+            className="min-h-11 shrink-0 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-indigo-500/30 transition-transform hover:scale-[1.03] disabled:opacity-60"
           >
             {COPY.newsletter.button}
           </button>
