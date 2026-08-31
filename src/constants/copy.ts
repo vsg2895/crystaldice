@@ -58,7 +58,7 @@ export const COPY = {
       'Independent reviews of the online casinos worth your time — payout speed, bonus terms and support tested one operator at a time.',
   },
   casinos: {
-    pageTitle: 'Online Casino Reviews',
+    pageTitle: 'Casinos We Opened Accounts With',
     pageDescription:
       'In-depth reviews of licensed online casinos, scored on payout speed, bonus terms and the quality of their support.',
     // Meta-description fallback for a casino review page. Casino records are
@@ -67,12 +67,20 @@ export const COPY = {
     // Short per-site tail appended to an ADMIN-ENTERED casino meta description.
     // Casino records are shared by every site, so without this the same
     // description would ship on all four domains the moment the field is filled.
+    // Appended to og:title / twitter:title on a casino review. The casino's
+    // own meta_title is shared master data, so without this every domain
+    // shipped an IDENTICAL share-card title for the same casino.
+    // H2 over the offers block on a casino page. The literal 'Special Offers'
+    // was hardcoded in the component on all six sites — an identical H2 on
+    // every review page in the network.
+    offersHeading: 'Current Offers',
+    reviewTitleTail: 'Tested End to End',
     reviewSignature: 'Independently reviewed and rated.',
     reviewSummary: 'an independent review of payout speed, bonus terms and support, tested end to end.',
     visitCasino: 'Visit Casino',
     readReview: 'Read Full Review',
     rating: 'Review Score',
-    noResults: 'No casinos match this filter yet.',
+    noResults: 'Nothing matches those filters yet — try widening them.',
   },
   specialOffers: {
     pageTitle: 'Casino Bonus Offers',
@@ -96,7 +104,7 @@ export const COPY = {
   newsletter: {
     title: 'Get new reviews first',
     subtitle: 'One email when we publish a review or find a bonus worth claiming.',
-    placeholder: 'Enter your email',
+    placeholder: 'Email for new reviews',
     button: 'Subscribe',
     success: 'Thanks! Check your inbox to verify your email and activate your subscription.',
     error: 'Something went wrong. Please try again.',
@@ -122,7 +130,7 @@ export const COPY = {
       'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose. We may earn a commission when you sign up through a link on this site, which never affects how we score a casino.',
   },
   errors: {
-    notFound: 'We could not find that page.',
+    notFound: 'That page is not here. It may have moved or been retired.',
     apiError: 'Failed to load content. Please try again later.',
   },
 } as const
