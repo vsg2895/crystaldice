@@ -74,6 +74,8 @@ export const COPY = {
     // was hardcoded in the component on all six sites — an identical H2 on
     // every review page in the network.
     offersHeading: 'Current Offers',
+    // Tail of the summary-panel H2: `{casino.name} tested at a glance`.
+    glanceHeadingTail: 'tested at a glance',
     reviewTitleTail: 'Tested End to End',
     reviewSignature: 'Independently reviewed and rated.',
     reviewSummary: 'an independent review of payout speed, bonus terms and support, tested end to end.',

@@ -90,14 +90,14 @@ export default function CookieConsent() {
             onClick={() => recordConsent('necessary')}
             className="inline-flex min-h-11 items-center justify-center rounded-lg border border-zinc-300 px-4 py-2 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-100"
           >
-            Reject non-essential
+            Reject Non-Essential
           </button>
           <button
             type="button"
             onClick={() => recordConsent('all')}
             className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
           >
-            Accept all
+            Accept All
           </button>
         </div>
       </div>
