@@ -109,6 +109,10 @@ export const COPY = {
     placeholder: 'Email for new reviews',
     button: 'Subscribe',
     success: 'Thanks! Check your inbox to verify your email and activate your subscription.',
+    // Used when the admin panel has this site's newsletter sending switched off.
+    // The address is still recorded — it just promises nothing that will not
+    // arrive, and does not claim the subscription is active either.
+    successNoEmail: "Thanks — you're on the list. We'll be in touch when we start sending.",
     error: 'Something went wrong. Please try again.',
   },
   footer: {

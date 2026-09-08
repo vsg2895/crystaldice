@@ -33,8 +33,18 @@ export default function NewsletterForm() {
         toast(data.errors?.email?.[0] ?? data.message ?? COPY.newsletter.error, 'error')
         return
       }
+      // The API reports whether it actually sent anything. With this site's
+      // newsletter sending switched off in the admin panel, the subscription is
+      // still recorded but no mail goes out — so the message must not tell the
+      // visitor to check an inbox that will stay empty.
+      const { email_sent: emailSent } = (await res.json().catch(() => ({}))) as {
+        email_sent?: boolean
+      }
+
       // Keep the form in place; confirm via a top-corner toast.
-      toast(COPY.newsletter.success, 'success')
+      // Defaults to the "check your inbox" wording when the field is missing,
+      // which is the behaviour every site had before the switch existed.
+      toast(emailSent === false ? COPY.newsletter.successNoEmail : COPY.newsletter.success, 'success')
       setEmail('')
     } catch {
       toast(COPY.newsletter.error, 'error')
