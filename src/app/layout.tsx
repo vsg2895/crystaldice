@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
-import NewsletterForm from '@/components/NewsletterForm'
 import SocialIcons from '@/components/SocialIcons'
 import CookieConsent from '@/components/CookieConsent'
 import ToastProvider from '@/components/ToastProvider'
@@ -177,13 +176,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </nav>
           </div>
         </header>
-
-        {/* Newsletter strip — directly under the header */}
-        <section className="border-b border-slate-200/70 bg-white/50 backdrop-blur-xl">
-          <div className="container mx-auto max-w-6xl px-4 py-5">
-            <NewsletterForm />
-          </div>
-        </section>
 
         <div className="flex-1">{children}</div>
 
