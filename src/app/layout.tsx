@@ -168,7 +168,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               <ul className="flex items-center gap-0.5 sm:gap-1" role="list">
                 {navLinks.map(({ href, label }) => (
                   <li key={href}>
-                    <Link href={href} className="flex min-h-11 items-center whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-indigo-50 hover:text-indigo-700 sm:px-4">
+                    <Link href={href} className="group relative flex min-h-11 items-center whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-semibold tracking-tight transition-all duration-200 sm:px-4 sm:text-base after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:content-[''] hover:after:w-1/2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 after:bg-indigo-600">
                       {label}
                     </Link>
                   </li>
