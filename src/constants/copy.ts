@@ -108,7 +108,14 @@ export const COPY = {
     subtitle: 'One email when we publish a review or find a bonus worth claiming.',
     placeholder: 'Email for new reviews',
     button: 'Subscribe',
-    success: 'Thanks! Check your inbox to verify your email and activate your subscription.',
+    // The spam line is NOT optional wording. This is a double opt-in list: an
+    // unconfirmed subscriber never receives anything again, and the verify mail
+    // is the single most likely message to be filtered — new sender, one link,
+    // no history. Telling people where to look is the difference between a
+    // signup and a dead row.
+    success:
+      'Thanks! Check your inbox to verify your email and activate your subscription. '
+      + 'If it is not there, look in your spam or junk folder.',
     // Used when the admin panel has this site's newsletter sending switched off.
     // The address is still recorded — it just promises nothing that will not
     // arrive, and does not claim the subscription is active either.
