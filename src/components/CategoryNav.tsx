@@ -26,7 +26,7 @@ export default function CategoryNav({
             // canonical category route — never through the 301.
             href={basePath === '/' ? `/?category=${c.slug}` : `/categories/${c.slug}`}
             aria-current={active ? 'page' : undefined}
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
+            className={`inline-flex min-h-11 items-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
               active
                 ? 'bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/30'
                 : 'border border-slate-200 bg-white/70 text-slate-600 backdrop-blur hover:border-indigo-300 hover:text-indigo-700'

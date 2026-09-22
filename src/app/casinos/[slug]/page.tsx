@@ -106,7 +106,7 @@ export default async function CasinoDetailPage({ params }: Props) {
       <main className="py-12 px-4">
         <div className="container mx-auto max-w-3xl">
           <nav className="mb-6 text-sm text-zinc-400">
-            <Link href="/" className="inline-block py-1 -my-1 hover:text-indigo-600">Home</Link> / <Link href="/casinos" className="inline-block py-1 -my-1 hover:text-indigo-600">Casinos</Link> / <span className="text-zinc-600">{casino.name}</span>
+            <Link href="/" className="inline-block -mx-1 px-1 py-3 -my-3 hover:text-indigo-600">Home</Link> / <Link href="/casinos" className="inline-block -mx-1 px-1 py-3 -my-3 hover:text-indigo-600">Casinos</Link> / <span className="text-zinc-600">{casino.name}</span>
           </nav>
 
           {banner && (
@@ -169,7 +169,7 @@ export default async function CasinoDetailPage({ params }: Props) {
           {casino.categories && casino.categories.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-2">
               {casino.categories.map((c) => (
-                <Link key={c.id} href={`/categories/${c.slug}`} className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-600 hover:bg-zinc-200">{c.name}</Link>
+                <Link key={c.id} href={`/categories/${c.slug}`} className="inline-flex min-h-11 items-center rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-600 hover:bg-zinc-200">{c.name}</Link>
               ))}
             </div>
           )}

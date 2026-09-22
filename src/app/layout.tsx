@@ -203,7 +203,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 <ul className="flex flex-col gap-2">
                   {navLinks.map(({ href, label }) => (
                     <li key={href}>
-                      <Link href={href} className="inline-block py-1.5 -my-1.5 text-sm text-slate-500 transition-colors hover:text-indigo-700">{label}</Link>
+                      <Link href={href} className="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700">{label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -214,7 +214,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               <ul className="flex flex-wrap gap-x-5 gap-y-2">
                 {LEGAL_PAGES.map(({ slug, label }) => (
                   <li key={slug}>
-                    <Link href={`/${slug}`} className="inline-block py-1.5 -my-1.5 text-xs text-slate-400 transition-colors hover:text-indigo-700">{label}</Link>
+                    <Link href={`/${slug}`} className="inline-block -mx-1 px-1 py-3 -my-3 text-xs text-slate-400 transition-colors hover:text-indigo-700">{label}</Link>
                   </li>
                 ))}
                 <li>
