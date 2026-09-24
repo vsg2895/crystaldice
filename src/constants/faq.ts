@@ -13,12 +13,7 @@ export const FAQ_ITEMS = [
   {
     question: "How do you rate the casinos on this site?",
     answer:
-      "We open an account, claim the advertised bonus and request a withdrawal ourselves, then score the operator on payout speed, the fairness of its bonus terms and how its support responds. The score is editorial and is not affected by commission.",
-  },
-  {
-    question: "Do you earn money from these casinos?",
-    answer:
-      "Yes. We may earn a commission when someone signs up through a link on this site. It never changes a score or a ranking, an operator cannot pay to appear higher, and we still list operators we score poorly.",
+      "We open an account, claim the advertised bonus and request a withdrawal ourselves, then score the operator on payout speed, the fairness of its bonus terms and how its support responds.",
   },
   {
     question: "How often are the reviews updated?",

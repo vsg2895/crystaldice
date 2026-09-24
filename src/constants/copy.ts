@@ -140,7 +140,7 @@ export const COPY = {
     // used in the email templates.
     postalAddress: '221B Baker Street, London NW1 6XE, United Kingdom',
     disclaimer:
-      'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose. We may earn a commission when you sign up through a link on this site, which never affects how we score a casino.',
+      'Gambling carries real financial risk and is strictly for adults aged 18 and over. Play only what you can afford to lose.',
   },
   errors: {
     notFound: 'That page is not here. It may have moved or been retired.',
