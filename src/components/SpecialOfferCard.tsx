@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { resolveImageUrl } from '@/lib/images'
+import OfferBanner from '@/components/OfferBanner'
 import type { SpecialOffer } from '@shared/types/specialOffer'
 
 // Idev Affiliation design: light glass offer card with indigo accents.
@@ -10,12 +10,12 @@ export default function SpecialOfferCard({ offer }: { offer: SpecialOffer }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/70 bg-white/80 shadow-[0_8px_30px_-12px_rgba(79,70,229,0.25)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgba(79,70,229,0.35)]">
-      {/* NO object-fit on the banner, deliberately. `fill` already stretches
-          it to the box, so the browser's default applies and the whole banner
-          is shown edge to edge instead of having its edges trimmed to match the
-          16:9 frame. */}
+      {/* The banner is shown whole, on the backdrop every bonus block shares
+          — see OfferBanner. The box keeps its 16:9 shape so a grid of cards
+          stays a grid whatever ratio the artwork came in at, and the backdrop
+          renders even when a bonus has no artwork yet. */}
       <Link href={`/special-offers/${offer.slug}`} className="relative block aspect-video overflow-hidden bg-slate-100">
-        {preview && <Image src={preview} alt={offer.title} fill className="transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 400px" />}
+        <OfferBanner src={preview} alt={offer.title} sizes="(max-width: 768px) 100vw, 400px" zoomOnHover />
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-5">
         {/* WHOSE bonus this is, above its name.
