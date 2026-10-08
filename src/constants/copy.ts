@@ -53,7 +53,7 @@ export const COPY = {
     viewAll: 'See All',
     // Leads the home <title>; the year and brand are appended in page.tsx.
     homeTitle: 'Independent Casino Reviews',
-    faqTitle: 'Questions we get asked',
+    faqTitle: 'Questions We Get Asked',
     metaDescription:
       'Independent reviews of the online casinos worth your time — payout speed, bonus terms and support tested one operator at a time.',
   },
@@ -76,7 +76,7 @@ export const COPY = {
     offersHeading: 'Current Offers',
     // Tail of the summary-panel H2: `{casino.name} tested at a glance`.
     glanceHeadingTail: 'tested at a glance',
-    reviewTitleTail: 'Tested End to End',
+    reviewTitleTail: 'Tested End To End',
     reviewSignature: 'Independently reviewed and rated.',
     reviewSummary: 'an independent review of payout speed, bonus terms and support, tested end to end.',
     visitCasino: 'Visit Casino',
@@ -104,7 +104,7 @@ export const COPY = {
     noResults: 'No categories yet.',
   },
   newsletter: {
-    title: 'Get new reviews first',
+    title: 'Get New Reviews First',
     subtitle: 'One email when we publish a review or find a bonus worth claiming.',
     placeholder: 'Email for new reviews',
     button: 'Subscribe',
