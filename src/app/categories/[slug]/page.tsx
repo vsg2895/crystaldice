@@ -139,16 +139,16 @@ export default async function CategoryDetailPage({ params, searchParams }: Props
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
 
-      <main className="py-12 px-4">
+      <main className="py-6 px-4 sm:py-12">
         <div className="container mx-auto max-w-5xl">
-          <nav className="mb-6 text-sm text-zinc-400">
+          <nav className="mb-3 text-sm sm:mb-6 text-zinc-400">
             <Link href="/" className="inline-block -mx-1 px-1 py-3 -my-3 hover:text-indigo-600">Home</Link> / <Link href="/categories" className="inline-block -mx-1 px-1 py-3 -my-3 hover:text-indigo-600">Categories</Link> / <span className="text-zinc-600">{category.name}</span>
           </nav>
-          <h1 className="text-3xl font-bold text-zinc-900">{category.name} Casinos</h1>
+          <h1 className="text-2xl font-bold sm:text-3xl text-zinc-900">{category.name} Casinos</h1>
           {casinos.length === 0 ? (
             <p className="mt-6 text-zinc-500">{COPY.casinos.noResults}</p>
           ) : (
-            <ol className="mt-8 flex flex-col gap-4">
+            <ol className="mt-5 sm:mt-8 flex flex-col gap-4">
               {casinos.map((casino, i) => <CasinoCard key={casino.id} casino={casino} rank={offset + i + 1} />)}
             </ol>
           )}

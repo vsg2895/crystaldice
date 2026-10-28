@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { resolveImageUrl } from '@/lib/images'
 import { getCategories } from '@/lib/api'
 import { buildWebPageSchema, jsonLdScript } from '@/lib/seo'
 import { COPY } from '@/constants/copy'
@@ -31,20 +32,26 @@ export default async function CategoriesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(webPage) }} />
-      <main className="py-12 px-4">
+      <main className="py-6 px-4 sm:py-12">
       <div className="container mx-auto max-w-5xl">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-zinc-900">{COPY.categories.pageTitle}</h1>
-          <p className="mt-2 text-zinc-500">{COPY.categories.pageDescription}</p>
+        <header className="mb-4 sm:mb-8">
+          <h1 className="text-2xl font-bold sm:text-3xl text-zinc-900">{COPY.categories.pageTitle}</h1>
+          <p className="mt-1 text-sm text-zinc-500 sm:mt-2 sm:text-base">{COPY.categories.pageDescription}</p>
         </header>
         {categories.length === 0 ? (
           <p className="text-zinc-500">{COPY.categories.noResults}</p>
         ) : (
-          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
             {categories.map((c) => (
               <li key={c.id}>
-                <Link href={`/categories/${c.slug}`} className="block rounded-2xl border border-zinc-100 bg-white p-6 text-center font-semibold text-zinc-800 shadow-sm hover:border-indigo-300 hover:text-indigo-600 transition-colors">
-                  {c.name}
+                <Link href={`/categories/${c.slug}`} className="block rounded-2xl border border-zinc-100 bg-white p-4 sm:p-6 text-center font-semibold text-zinc-800 shadow-sm hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+                  {/* Icon beside the name, as on the chips and in the Casinos menu. */}
+                  <span className="inline-flex items-center justify-center gap-2">
+                    {c.logo_path && (
+                      <img src={resolveImageUrl(c.logo_path)!} alt="" width={20} height={20} className="h-5 w-5 shrink-0" />
+                    )}
+                    {c.name}
+                  </span>
                 </Link>
               </li>
             ))}

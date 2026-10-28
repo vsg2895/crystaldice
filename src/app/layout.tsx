@@ -6,10 +6,14 @@ import CookieConsent from '@/components/CookieConsent'
 import ToastProvider from '@/components/ToastProvider'
 import CookieSettingsButton from '@/components/CookieSettingsButton'
 import Logo from '@/components/Logo'
-import { getSocialLinks, hasSpecialOffers } from '@/lib/api'
+import { getSocialLinks, hasSpecialOffers, getCategories, getBonusArea } from '@/lib/api'
 import { buildOrganizationSchema, buildWebSiteSchema, jsonLdScript } from '@/lib/seo'
 import { SITE_URL } from '@/lib/config'
 import { COPY } from '@/constants/copy'
+import NavDropdown from '@/components/NavDropdown'
+import FooterNavGroup from '@/components/FooterNavGroup'
+import MobileNav from '@/components/MobileNav'
+import { resolveImageUrl } from '@/lib/images'
 import { LEGAL_PAGES } from '@/constants/legalPages'
 import type { SocialLink } from '@shared/types/socialLink'
 import './globals.css'
@@ -114,6 +118,25 @@ const NAV_LINKS = [
   { href: '/categories', label: COPY.nav.categories },
 ]
 
+/** The header dropdown panel, in this site's own palette. */
+const NAV_PANEL = {
+  panelClassName: 'bg-white ring-1 ring-slate-900/[0.07]',
+  itemClassName: 'text-slate-600 hover:bg-indigo-50 hover:text-indigo-700',
+  allItemClassName: 'text-slate-900 hover:bg-indigo-50 hover:text-indigo-700',
+  arrowClassName: 'text-indigo-500',
+}
+
+/** The phone menu (below `md`), in this site's own palette. */
+const NAV_MOBILE = {
+  triggerClassName: 'text-slate-700 hover:bg-indigo-50 hover:text-indigo-700',
+  panelClassName: 'bg-white border-slate-200',
+  rowClassName: 'text-slate-700 hover:bg-indigo-50 hover:text-indigo-700',
+  rowExpandedClassName: 'bg-indigo-50 text-indigo-700',
+  allClassName: 'text-slate-800 hover:bg-indigo-50 hover:text-indigo-700',
+  childClassName: 'text-slate-500 hover:bg-indigo-50 hover:text-indigo-700',
+  guideClassName: 'border-indigo-100',
+}
+
 function GemMark() {
   return (
     <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-400 shadow-lg shadow-indigo-500/30">
@@ -139,6 +162,21 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const showSpecialOffers = await hasSpecialOffers()
   const navLinks = NAV_LINKS.filter(({ href }) => href !== '/special-offers' || showSpecialOffers)
 
+  // Children for the Casinos and Bonuses entries, header and footer
+  // alike. Each carries the icon its chip shows, resolved here on the server so
+  // the client menus never need the storage URL. A failed fetch yields no
+  // items, and the entry then stays the plain link it always was.
+  const categoryMenuItems = await getCategories()
+    .then((res) => res.data.map((c) => ({ slug: c.slug, name: c.name, icon: resolveImageUrl(c.logo_path) })))
+    .catch(() => [])
+  // Bonus types with at least one visible offer on this site (the API drops
+  // empty ones). getBonusArea already falls back to [] on failure.
+  const bonusMenuItems = (await getBonusArea()).map((section) => ({
+    slug: section.slug,
+    name: section.name,
+    icon: resolveImageUrl(section.icon_path),
+  }))
+
   // Site-wide structured data, rendered once here so every page carries it.
   // Next.js manages the document <head> (manual <head> tags in a root layout are
   // discouraged), so per the framework's JSON-LD guide the <script> is rendered
@@ -163,17 +201,32 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-xl">
           <div className="container mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
             <Logo />
-            <nav aria-label="Main navigation" className="no-scrollbar -mr-4 min-w-0 overflow-x-auto pr-4">
+            <nav aria-label="Main navigation" className="hidden md:block no-scrollbar -mr-4 min-w-0 overflow-x-auto pr-4">
               <ul className="flex items-center gap-0.5 sm:gap-1" role="list">
-                {navLinks.map(({ href, label }) => (
+                {navLinks.map(({ href, label }) =>
+                  href === '/casinos' && categoryMenuItems.length > 0 ? (
+                    <NavDropdown key={href} label={label} href={href} allLabel={COPY.nav.allCasinos} itemBasePath="/categories" items={categoryMenuItems} triggerClassName="group relative flex min-h-11 items-center whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-semibold tracking-tight transition-all duration-200 sm:px-4 sm:text-base after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:content-[''] hover:after:w-1/2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 after:bg-indigo-600" {...NAV_PANEL} />
+                  ) : href === '/special-offers' && bonusMenuItems.length > 0 ? (
+                    <NavDropdown key={href} label={label} href={href} allLabel={COPY.nav.allOffers} itemBasePath="/bonuses" items={bonusMenuItems} triggerClassName="group relative flex min-h-11 items-center whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-semibold tracking-tight transition-all duration-200 sm:px-4 sm:text-base after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:content-[''] hover:after:w-1/2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 after:bg-indigo-600" {...NAV_PANEL} />
+                  ) : (
                   <li key={href}>
                     <Link href={href} className="group relative flex min-h-11 items-center whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-semibold tracking-tight transition-all duration-200 sm:px-4 sm:text-base after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:content-[''] hover:after:w-1/2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 after:bg-indigo-600">
                       {label}
                     </Link>
                   </li>
-                ))}
+                ),
+                )}
               </ul>
             </nav>
+            {/* Below md the strip above is hidden and this menu replaces it. */}
+            <MobileNav
+              links={navLinks}
+              groups={{
+                '/casinos': { allLabel: COPY.nav.allCasinos, items: categoryMenuItems, itemBasePath: '/categories' },
+                '/special-offers': { allLabel: COPY.nav.allOffers, items: bonusMenuItems, itemBasePath: '/bonuses' },
+              }}
+              theme={NAV_MOBILE}
+            />
           </div>
         </header>
 
@@ -198,20 +251,32 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 )}
               </div>
 
-              <div className="sm:text-right">
+              {/* On the right edge but LEFT-aligned, as on winpalack: right-aligning
+                  started every label at a different x, so the column read as
+                  ragged. `justify-self-end` sizes the column to its labels and
+                  pushes it to the right of its grid track. */}
+              <div className="sm:justify-self-end">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500">Explore</p>
                 <ul className="flex flex-col gap-2">
-                  {navLinks.map(({ href, label }) => (
+                  {navLinks.map(({ href, label }) =>
+                    href === '/casinos' && categoryMenuItems.length > 0 ? (
+                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allCasinos} itemBasePath="/categories" items={categoryMenuItems} linkClassName="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
+                    ) : href === '/special-offers' && bonusMenuItems.length > 0 ? (
+                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allOffers} itemBasePath="/bonuses" items={bonusMenuItems} linkClassName="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
+                    ) : (
                     <li key={href}>
                       <Link href={href} className="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700">{label}</Link>
                     </li>
-                  ))}
+                  ),
+                  )}
                 </ul>
               </div>
             </div>
 
+            {/* Two even columns on a phone, so every link starts on one of two
+                shared edges; wrapped as a paragraph, no two rows lined up. */}
             <nav aria-label="Legal" className="mt-10 border-t border-slate-200/70 pt-6">
-              <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              <ul className="grid grid-cols-2 gap-x-5 gap-y-3 sm:flex sm:flex-wrap sm:gap-y-2">
                 {LEGAL_PAGES.map(({ slug, label }) => (
                   <li key={slug}>
                     <Link href={`/${slug}`} className="inline-block -mx-1 px-1 py-3 -my-3 text-xs text-slate-400 transition-colors hover:text-indigo-700">{label}</Link>
@@ -233,7 +298,17 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                     reset it and the browser default for the tag is italic. */}
                 <address className="mt-1 text-xs not-italic text-slate-400">{COPY.footer.postalAddress}</address>
               </div>
-              <p className="text-xs text-slate-400">18+ · Gamble responsibly</p>
+              {/* The circled 18+ reads as a mark rather than as another line of
+                  grey type, with "Gamble responsibly" beside it — the same pair
+                  every site's footer carries, each in its own accent. Not
+                  `aria-hidden`: the sentence beside it never says the age, so
+                  a screen reader needs the "18+" too. */}
+              <p className="flex items-center gap-3 text-xs text-slate-400">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-indigo-600 text-indigo-600 text-[13px] font-extrabold">
+                  18+
+                </span>
+                Gamble responsibly
+              </p>
             </div>
             <p className="mt-4 text-xs text-slate-400">{COPY.footer.disclaimer}</p>
           </div>
