@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
+import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate'
 import SocialIcons from '@/components/SocialIcons'
 import CookieConsent from '@/components/CookieConsent'
 import ToastProvider from '@/components/ToastProvider'
@@ -196,6 +197,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col text-slate-900">
+        {/* Opens every page at its top — see the component. */}
+        <ScrollToTopOnNavigate />
         <ToastProvider>
         <script
           type="application/ld+json"
