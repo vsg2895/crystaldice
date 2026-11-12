@@ -14,26 +14,18 @@ function Stars({ rating }: { rating: number }) {
   )
 }
 
-// Idev Affiliation — minimalist review row: an elegant rank numeral, a prominent
+// Idev Affiliation — minimalist review row: a prominent
 // brand logo, then only the three things that matter (name · rating · bonus) and
 // a clear primary CTA. No rank chip, no category clutter.
-export default function CasinoCard({ casino, rank }: { casino: CasinoWithAttachment; rank?: number }) {
+export default function CasinoCard({ casino }: { casino: CasinoWithAttachment; rank?: number }) {
   // Card shows the casino's "Image" (logo), NOT the wide "Banner Image" (that's
   // used big on the single casino page). Falls back to the banner if no Image.
   const image = resolveImageUrl(casino.image_path ?? casino.banner_image)
 
   return (
     <li className="group flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-[0_2px_18px_-10px_rgba(15,23,42,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-18px_rgba(79,70,229,0.45)] sm:h-36 sm:flex-row sm:items-center sm:gap-6 sm:p-5">
-      {/* Rank numeral + prominent logo */}
+      {/* Prominent logo */}
       <div className="flex items-center gap-3 sm:gap-4">
-        {rank != null && (
-          <span
-            className="w-6 shrink-0 bg-gradient-to-br from-indigo-600 to-cyan-500 bg-clip-text text-center font-display text-2xl font-bold leading-none tabular-nums text-transparent sm:w-8 sm:text-[2rem]"
-            aria-label={`Rank ${rank}`}
-          >
-            {rank}
-          </span>
-        )}
         <div className="flex-shrink-0">
           {image ? (
             // Directly-sized image (NO `fill`) → renders at exactly 160×96.
