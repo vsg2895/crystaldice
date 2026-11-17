@@ -265,15 +265,15 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                   pushes it to the right of its grid track. */}
               <div className="sm:justify-self-end">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500">Explore</p>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col">
                   {navLinks.map(({ href, label }) =>
                     href === '/casinos' && categoryMenuItems.length > 0 ? (
-                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allCasinos} itemBasePath="/categories" items={categoryMenuItems} linkClassName="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
+                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allCasinos} itemBasePath="/categories" items={categoryMenuItems} linkClassName="inline-flex min-h-11 min-w-11 items-center text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
                     ) : href === '/special-offers' && bonusMenuItems.length > 0 ? (
-                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allOffers} itemBasePath="/bonuses" items={bonusMenuItems} linkClassName="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
+                      <FooterNavGroup key={href} label={label} href={href} allLabel={COPY.nav.allOffers} itemBasePath="/bonuses" items={bonusMenuItems} linkClassName="inline-flex min-h-11 min-w-11 items-center text-sm text-slate-500 transition-colors hover:text-indigo-700" guideClassName="border-indigo-100" />
                     ) : (
                     <li key={href}>
-                      <Link href={href} className="inline-block -mx-1 px-1 py-3 -my-3 text-sm text-slate-500 transition-colors hover:text-indigo-700">{label}</Link>
+                      <Link href={href} className="inline-flex min-h-11 min-w-11 items-center text-sm text-slate-500 transition-colors hover:text-indigo-700">{label}</Link>
                     </li>
                   ),
                   )}
@@ -287,7 +287,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               <ul className="grid grid-cols-2 gap-x-5 gap-y-3 sm:flex sm:flex-wrap sm:gap-y-2">
                 {LEGAL_PAGES.map(({ slug, label }) => (
                   <li key={slug}>
-                    <Link href={`/${slug}`} className="inline-block -mx-1 px-1 py-3 -my-3 text-xs text-slate-400 transition-colors hover:text-indigo-700">{label}</Link>
+                    <Link href={`/${slug}`} className="inline-flex min-h-11 min-w-11 items-center text-xs text-slate-400 transition-colors hover:text-indigo-700">{label}</Link>
                   </li>
                 ))}
                 <li>
